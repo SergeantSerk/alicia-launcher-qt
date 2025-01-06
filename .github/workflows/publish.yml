@@ -68,16 +68,17 @@ jobs:
 
     # Copy DLLs needed to run launcher
     - name: Copy libraries (OpenSSL)
-      working-directory: ${{ env.IQTA_TOOLS }}/OpenSSLv3/Win_x64/bin/
+      working-directory: ${{ env.QT6_INSTALL_DIR }}/Qt/Tools/OpenSSLv3/Win_x64/bin/
       run: cp libcrypto-3-x64.dll,libssl-3-x64.dll ${{ github.workspace }}/dist/bin/
-
-    - name: Packing
-      run: Compress-Archive -Path ${{ github.workspace }}/dist/* -Destination ${{ github.workspace }}/launcher-${{ github.ref_name }}-win64.zip
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         path: ${{ github.workspace }}/dist/bin/*
+
+    - name: Packing
+      if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      run: Compress-Archive -Path ${{ github.workspace }}/dist/* -Destination ${{ github.workspace }}/launcher-${{ github.ref_name }}-win64.zip
 
     - name: Release
       uses: softprops/action-gh-release@v2
