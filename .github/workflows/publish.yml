@@ -77,7 +77,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        path: ${{ github.workspace }}/launcher-${{ github.ref_name }}-win64.zip
+        path: ${{ github.workspace }}/dist/bin/*
 
     - name: Release
       uses: softprops/action-gh-release@v2
