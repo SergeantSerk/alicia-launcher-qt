@@ -48,14 +48,14 @@ jobs:
         tools: 'tools_opensslv3_x64 tools_cmake tools_ninja tools_mingw1310'
         dir: ${{ env.QT6_INSTALL_DIR }}
 
-    - name: Configure
-      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
-      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{ github.workspace }}/build -DOPENSSL_ROOT_DIR=${{ env.QT6_INSTALL_DIR }}/Qt/Tools/OpenSSLv3/Win_x64 -G "Ninja Multi-Config"
-
-    - name: Build
-      # Build your program with the given configuration
-      run: cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
+    - name: CMake Action
+      uses: threeal/cmake-action@v2.1.0
+      with:
+        source-dir: ${{ github.workspace }}
+        build-dir: ${{ github.workspace }}/build
+        generator: 'Ninja Multi-Config'
+        options: OPENSSL_ROOT_DIR=${{ env.QT6_INSTALL_DIR }}/Qt/Tools/OpenSSLv3/Win_x64
+        build-args: '--config ${{ env.BUILD_TYPE }}'
 
     - name: Test
       working-directory: ${{ github.workspace }}/build
