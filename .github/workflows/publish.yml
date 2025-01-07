@@ -53,7 +53,6 @@ jobs:
       with:
         vulkan-query-version: latest
         vulkan-components: Vulkan-Headers
-        vulkan-use-cache: true
 
     - name: CMake Action
       uses: threeal/cmake-action@v2
