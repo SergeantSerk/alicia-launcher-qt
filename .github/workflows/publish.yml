@@ -48,11 +48,11 @@ jobs:
         tools: 'tools_opensslv3_x64 tools_cmake tools_ninja tools_mingw1310'
         dir: ${{ env.QT6_INSTALL_DIR }}
     
-    - name: Prepare Vulkan SDK
-      uses: humbletim/setup-vulkan-sdk@v1.2.0
+    - name: Install Vulkan SDK
+      uses: humbletim/install-vulkan-sdk@v1.1.1
       with:
-        vulkan-query-version: latest
-        vulkan-components: Vulkan-Headers
+        version: latest
+        cache: true
 
     - name: CMake Action
       uses: threeal/cmake-action@v2
