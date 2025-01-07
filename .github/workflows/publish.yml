@@ -54,8 +54,9 @@ jobs:
         source-dir: ${{ github.workspace }}
         build-dir: ${{ github.workspace }}/build
         generator: 'Ninja Multi-Config'
-        options: OPENSSL_ROOT_DIR=${{ env.QT6_INSTALL_DIR }}/Qt/Tools/OpenSSLv3/Win_x64
-        build-args: '--config ${{ env.BUILD_TYPE }}'
+        options: |
+          OPENSSL_ROOT_DIR=${{ env.QT6_INSTALL_DIR }}/Qt/Tools/OpenSSLv3/Win_x64
+        build-args: '--config ${{ env.BUILD_TYPE }} --parallel'
 
     - name: Test
       working-directory: ${{ github.workspace }}/build
