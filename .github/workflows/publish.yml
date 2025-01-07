@@ -49,7 +49,7 @@ jobs:
         dir: ${{ env.QT6_INSTALL_DIR }}
 
     - name: CMake Action
-      uses: threeal/cmake-action@v2.1.0
+      uses: threeal/cmake-action@v2
       with:
         source-dir: ${{ github.workspace }}
         build-dir: ${{ github.workspace }}/build
